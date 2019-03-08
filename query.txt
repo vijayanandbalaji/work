@@ -4,7 +4,7 @@ create table product_category(ct_id int(11) primary key auto_increment,ct_name v
 alter table product_category auto_increment=101;
 create table product_brand(br_id int(11) primary key auto_increment,br_name varchar(30)not null);
 alter table product_brand auto_increment=1001;
-create table product(pr_id int(11) primary key auto_increment,pr_name varchar(30) not null,pr_description varchar(100) not null,pr_price float not null,rating float(2,1),pr_ct_id int(11) not null,pr_br_id int(11) not null,pr_availability int(11) not null,foreign key (pr_br_id) references product_brand(br_id),foreign key(pr_ct_id) references product_category(ct_id));
+create table product(pr_id int(11) primary key auto_increment,pr_name varchar(30) not null,pr_description varchar(100) not null,pr_price float not null,rating float(2,1),pr_ct_id int(11) not null,pr_br_id int(11) not null,pr_availability int(11) not null,image_path varchar(255),foreign key (pr_br_id) references product_brand(br_id),foreign key(pr_ct_id) references product_category(ct_id));
 +--------------------------------------------------------------------------------------+
 insert into product_brand(br_name) values("Phillips");
 insert into product_brand(br_name) values("Braun");
@@ -24,3 +24,10 @@ insert into product(pr_name,pr_description,pr_price,rating,pr_ct_id,pr_br_id,pr_
 insert into product(pr_name,pr_description,pr_price,rating,pr_ct_id,pr_br_id,pr_availability) values("Paint Markers","ASDFGHJKLZXCVBNM",230.30,4.1,3,5,1);
 
 SELECT p.*,b.*,c.* FROM product p JOIN product_brand b JOIN product_category c ON p.pr_br_id=b.br_id AND p.pr_ct_id=c.ct_id;
+
+
+
+---------------------------------------------------------------+
+create table product(pr_id int(11) primary key auto_increment,pr_name varchar(30) not null,pr_description varchar(100) not null,pr_price float not null,rating float(2,1),pr_ct_id int(11) not null,pr_br_id int(11) not null,pr_availability int(11) not null,image_path varchar(255),foreign key (pr_br_id) references product_brand(br_id),foreign key(pr_ct_id) references product_category(ct_id));
+
+alter table product modify pr_availability int(11) not null default 1;
